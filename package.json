@@ -1,0 +1,52 @@
+{
+  "name": "sridhar-portfolio",
+  "version": "1.0.0",
+  "description": "High-performance portfolio website for Sridhar K",
+  "scripts": {
+    "build": "node build.js",
+    "build:css": "postcss styles.css -o styles.min.css",
+    "build:js": "terser script.js -o script.min.js --compress --mangle --source-map",
+    "optimize": "npm run optimize:html && npm run optimize:images",
+    "optimize:html": "html-minifier --collapse-whitespace --remove-comments --minify-css --minify-js --input-dir . --output-dir dist --file-ext html",
+    "optimize:images": "imagemin \"**/*.{jpg,jpeg,png,gif,svg}\" --out-dir=dist",
+    "dev": "live-server --port=8080 --open=/",
+    "analyze": "node performance-test.js",
+    "lighthouse": "lighthouse http://localhost:8080 --output=html --output-path=./lighthouse-report.html",
+    "test:performance": "node performance-test.js",
+    "serve": "http-server dist -p 8080 -c-1",
+    "start": "npm run dev",
+    "perf": "npm run build && npm run serve & sleep 2 && npm run test:performance"
+  },
+  "devDependencies": {
+    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "autoprefixer": "^10.4.16",
+    "chrome-launcher": "^1.1.0",
+    "cssnano": "^6.0.1",
+    "html-minifier": "^4.0.0",
+    "http-server": "^14.1.1",
+    "imagemin": "^8.0.1",
+    "imagemin-cli": "^7.0.0",
+    "lighthouse": "^11.4.0",
+    "live-server": "^1.2.2",
+    "postcss": "^8.4.32",
+    "postcss-cli": "^11.0.0",
+    "terser": "^5.26.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sridhar/sridhar.github.com"
+  },
+  "keywords": [
+    "portfolio",
+    "performance",
+    "optimization",
+    "web-vitals"
+  ],
+  "author": "Sridhar K",
+  "license": "MIT"
+}
